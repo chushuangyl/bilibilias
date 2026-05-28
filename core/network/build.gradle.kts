@@ -23,6 +23,8 @@ kotlin {
             api(libs.ktor.serialization.kotlinx.protobuf)
             api(libs.ksoup.network)
             api(libs.ktor.client.logging)
+            api(libs.kotlinx.io.core)
+            api(libs.kotlinx.io.bytestring)
         }
 
         androidMain.dependencies {

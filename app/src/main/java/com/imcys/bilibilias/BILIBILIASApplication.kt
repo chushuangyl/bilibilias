@@ -7,21 +7,21 @@ import com.baidu.mobstat.StatService
 import com.imcys.bilibilias.agent.functions.BILIAnalysisAppFunctions
 import com.imcys.bilibilias.common.data.CommonBuildConfig
 import com.imcys.bilibilias.common.memory.FairMemoryReceiver
-import com.imcys.bilibilias.common.shizuku.ShizukuStateManager
 import com.imcys.bilibilias.common.utils.baiduAnalyticsSafe
-import com.imcys.bilibilias.data.di.sharedKoinModules
 import com.imcys.bilibilias.data.repository.AppSettingsRepository
-import com.imcys.bilibilias.datastore.*
+import com.imcys.bilibilias.datastore.enabledConcurrentMerge
+import com.imcys.bilibilias.datastore.maxConcurrentDownloads
 import com.imcys.bilibilias.di.androidPlatformKoinModules
 import com.imcys.bilibilias.download.FfmpegRuntimeConfig
 import com.imcys.bilibilias.download.NewDownloadManager
+import com.imcys.bilibilias.download.SharedDownloadManager
+import com.imcys.bilibilias.shared.di.sharedKoinModules
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.getKoin
-import org.koin.android.ext.android.inject
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -29,7 +29,6 @@ import org.koin.core.context.startKoin
 class BILIBILIASApplication : Application(), AppFunctionConfiguration.Provider {
 
     private val applicationScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
-    private val shizukuStateManager: ShizukuStateManager by inject<ShizukuStateManager>()
     private var fairMemoryReceiver: FairMemoryReceiver? = null
 
     override fun onCreate() {
@@ -63,7 +62,7 @@ class BILIBILIASApplication : Application(), AppFunctionConfiguration.Provider {
     private fun bindFairMemoryReceiver() {
         applicationScope.launch {
             fairMemoryReceiver = FairMemoryReceiver(this@BILIBILIASApplication) {
-                getKoin().get<NewDownloadManager>()
+                getKoin().get<SharedDownloadManager>() as NewDownloadManager
             }.also { receiver ->
                 receiver.initialize()
             }

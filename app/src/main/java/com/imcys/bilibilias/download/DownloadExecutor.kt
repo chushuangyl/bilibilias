@@ -24,7 +24,7 @@ import java.io.FileOutputStream
 class DownloadExecutor(
     private val httpClient: HttpClient,
     private val appSettingsRepository: AppSettingsRepository
-) {
+) :SharedDownloadExecutor{
     companion object {
         private const val MAX_RETRY_ATTEMPTS = 5
         private const val RETRY_DELAY_MS = 3000L
@@ -39,7 +39,7 @@ class DownloadExecutor(
      * @param onProgress 进度回调 (0.0 - 1.0)
      * @return 是否下载成功
      */
-    suspend fun downloadFile(
+    override suspend fun downloadFile(
         downloadUrl: String,
         savePath: String,
         referer: String,

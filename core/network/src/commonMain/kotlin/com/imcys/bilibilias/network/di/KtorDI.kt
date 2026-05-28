@@ -83,9 +83,6 @@ val netWorkModule = module {
             install(HttpCookies) {
                 storage = get<AsCookiesStorage>()
             }
-            install(FirebasePerfPlugin) {
-                tracer = get()
-            }
             if (CommonBuildConfig.enabledNetworkLogging) {
                 install(Logging) {
                     logger = object : Logger {

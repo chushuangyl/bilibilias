@@ -13,7 +13,6 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC" />
 
-<!--    <uses-permission android:name="moe.shizuku.manager.permission.API_V23" />-->
 
     <application
         android:name=".BILIBILIASApplication"
@@ -72,11 +71,6 @@
                     android:scheme="bilibilias"/>
             </intent-filter>
         </activity>
-
-        <activity
-            android:name=".ui.error.AppCrashActivity"
-            android:exported="false"
-            android:launchMode="singleTask" />
 
         <service
             android:name=".download.service.DownloadService"

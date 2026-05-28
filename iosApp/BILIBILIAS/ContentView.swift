@@ -9,27 +9,18 @@ import SwiftUI
 import UIKit
 import ASShared
 
-struct SharedSmoke {
-    let started: String
-
-    init() {
-        started = "ASShared ready"
+struct ComposeView: UIViewControllerRepresentable {
+    func makeUIViewController(context: Self.Context) -> UIViewController {
+        MainViewControllerKt.MainViewController()
     }
+
+    func updateUIViewController(_ uiViewController: UIViewController, context: Self.Context) {}
 }
 
 struct ContentView: View {
-    private let sharedSmoke = SharedSmoke()
-
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("BILIBILIAS")
-            Text(sharedSmoke.started)
-                .font(.footnote)
-        }
-        .padding()
+        ComposeView()
+            .ignoresSafeArea()
     }
 }
 

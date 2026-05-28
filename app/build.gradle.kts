@@ -92,7 +92,6 @@ android {
             buildConfigField("boolean", "ENABLED_PLAY_APP_MODE", enabledPlayAppMode)
             signingConfig = signingConfigs.getByName("BILIBILIASSigningConfig")
             resValue("string", "app_channel", "Beta")
-
         }
     }
 
@@ -147,14 +146,13 @@ dependencies {
     implementation(project(":core:common"))
     implementation(project(":core:ui"))
     implementation(project(":core:data"))
+    implementation(project(":shared"))
 
     implementation(libs.ffmpeg.kit.x6kb)
 
     // Firebase 选配
     firebaseDependencies(enabledAnalytics.toBoolean())
 
-    // 彩带
-    implementation(libs.konfetti.compose)
     // 高斯模糊
     implementation(libs.compose.cloudy)
 

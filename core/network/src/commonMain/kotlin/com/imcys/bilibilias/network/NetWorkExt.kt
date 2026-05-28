@@ -95,7 +95,7 @@ inline fun <reified Data> HttpClient.httpRequest(
         } catch (e: Exception) {
             emit(NetWorkResult.Error(null, null, e.message ?: ""))
         }
-    }.flowOn(Dispatchers.IO)
+    }.flowOn(Dispatchers.Default)
 
 inline fun <reified Data> HttpClient.httpRequest(
     adapter: NetWorkAdapter<Data>,
@@ -119,7 +119,7 @@ inline fun <reified Data> HttpClient.httpRequest(
         } catch (e: Exception) {
             emit(NetWorkResult.Error(null, null, e.message ?: ""))
         }
-    }.flowOn(Dispatchers.IO)
+    }.flowOn(Dispatchers.Default)
 
 @PublishedApi
 internal suspend fun <Data> FlowCollector<NetWorkResult<Data>>.handleSuccess(

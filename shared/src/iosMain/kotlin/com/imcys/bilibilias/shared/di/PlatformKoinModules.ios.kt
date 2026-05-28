@@ -1,5 +1,9 @@
 package com.imcys.bilibilias.shared.di
 
+import com.imcys.bilibilias.download.IOSDownloadExecutor
+import com.imcys.bilibilias.download.IOSDownloadManager
+import com.imcys.bilibilias.download.SharedDownloadExecutor
+import com.imcys.bilibilias.download.SharedDownloadManager
 import com.imcys.bilibilias.network.plugin.NetworkPerformanceTracer
 import org.koin.core.module.Module
 import org.koin.dsl.module
@@ -25,6 +29,10 @@ private val iosPlatformModule = module {
     single<NetworkPerformanceTracer> {
         IosNoOpNetworkPerformanceTracer()
     }
+
+    single< SharedDownloadExecutor> { IOSDownloadExecutor() }
+    single< SharedDownloadManager> { IOSDownloadManager() }
+
 }
 
 internal actual fun platformKoinModules(): List<Module> = listOf(iosPlatformModule)
